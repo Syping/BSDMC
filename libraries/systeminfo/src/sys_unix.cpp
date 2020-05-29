@@ -5,6 +5,12 @@
 #include <sys/utsname.h>
 #include <fstream>
 
+#ifdef Q_OS_FREEBSD
+#include <sys/sysctl.h>
+#include <sys/types.h>
+#include <QSysInfo>
+#endif
+
 Sys::KernelInfo Sys::getKernelInfo()
 {
     Sys::KernelInfo out;
@@ -17,6 +23,12 @@ Sys::KernelInfo Sys::getKernelInfo()
 
 uint64_t Sys::getSystemRam()
 {
+#ifdef Q_OS_FREEBSD
+    uint64_t physmem;
+    size_t len;
+    sysctlbyname("hw.physmem", &physmem, &len, NULL, 0);
+    return physmem;
+#elif defined Q_OS_LINUX
     std::string token;
     std::ifstream file("/proc/meminfo");
     while(file >> token)
@@ -37,6 +49,9 @@ uint64_t Sys::getSystemRam()
         file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return 0; // nothing found
+#else
+    return 0; // unsupported system
+#endif
 }
 
 bool Sys::isCPU64bit()
@@ -52,6 +67,12 @@ bool Sys::isSystem64bit()
 
 Sys::DistributionInfo Sys::getDistributionInfo()
 {
+#if defined Q_OS_FREEBSD
+    DistributionInfo result;
+    result.distributionName = "FreeBSD";
+    result.distributionVersion = QSysInfo::kernelVersion();
+    return result;
+#elif defined Q_OS_LINUX
     DistributionInfo systemd_info = read_os_release();
     DistributionInfo lsb_info = read_lsb_release();
     DistributionInfo legacy_info = read_legacy_release();
@@ -72,4 +93,7 @@ Sys::DistributionInfo Sys::getDistributionInfo()
         }
     }
     return result;
+#else
+    return DistributionInfo();
+#endif
 }

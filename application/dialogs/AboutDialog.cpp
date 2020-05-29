@@ -1,4 +1,5 @@
 /* Copyright 2013-2019 MultiMC Contributors
+ * Copyright 2020 BSDMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +34,10 @@ QString getCreditsHtml(QStringList patrons)
     QTextStream stream(&output);
     stream << "<center>\n";
     // TODO: possibly retrieve from git history at build time?
+    stream << "<h3>" << QObject::tr("BSDMC Developers", "About Credits") << "</h3>\n";
+    stream << "<p>Syping &lt;<a href='https://github.com/Syping/'>Syping</a>&gt;</p>\n";
+    stream << "<br />\n";
+
     stream << "<h3>" << QObject::tr("MultiMC Developers", "About Credits") << "</h3>\n";
     stream << "<p>Andrew Okin &lt;<a href='mailto:forkk@forkk.net'>forkk@forkk.net</a>&gt;</p>\n";
     stream << "<p>Petr Mrázek &lt;<a href='mailto:peterix@gmail.com'>peterix@gmail.com</a>&gt;</p>\n";
@@ -84,7 +89,7 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
     ui->urlLabel->setOpenExternalLinks(true);
 
     ui->icon->setPixmap(MMC->getThemedIcon("logo").pixmap(64));
-    ui->title->setText("MultiMC 5");
+    ui->title->setText("BSDMC 5");
 
     ui->versionLabel->setText(tr("Version") +": " + BuildConfig.printableVersionString());
     ui->platformLabel->setText(tr("Platform") +": " + BuildConfig.BUILD_PLATFORM);

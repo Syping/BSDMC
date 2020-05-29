@@ -1,3 +1,7 @@
+# BSDMC 0.6.12
+
+BSDMC: MultiMC fork for FreeBSD
+
 # MultiMC 0.6.11
 
 This adds Forge 1.13+ support using [ForgeWrapper](https://github.com/ZekerZhayard/ForgeWrapper) by ZekerZhayard.

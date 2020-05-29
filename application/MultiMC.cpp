@@ -88,7 +88,7 @@ static const QLatin1String liveCheckFile("live.check");
 
 using namespace Commandline;
 
-#define MACOS_HINT "If you are on macOS Sierra, you might have to move MultiMC.app to your /Applications or ~/Applications folder. "\
+#define MACOS_HINT "If you are on macOS Sierra, you might have to move BSDMC.app to your /Applications or ~/Applications folder. "\
     "This usually fixes the problem and you can move the application elsewhere afterwards.\n"\
     "\n"
 
@@ -138,10 +138,10 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         consoleAttached = true;
     }
 #endif
-    setOrganizationName("MultiMC");
-    setOrganizationDomain("multimc.org");
-    setApplicationName("MultiMC5");
-    setApplicationDisplayName("MultiMC 5");
+    setOrganizationName("Syping");
+    setOrganizationDomain("bsdmc.syping.de");
+    setApplicationName("BSDMC5");
+    setApplicationDisplayName("BSDMC 5");
     setApplicationVersion(BuildConfig.printableVersionString());
 
     startTime = QDateTime::currentDateTime();
@@ -159,7 +159,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
                 showFatalErrorMessage(
                     "Unsupported system detected!",
                     "Linux-on-Windows distributions are not supported.\n\n"
-                    "Please use the Windows MultiMC binary when playing on Windows."
+                    "Please use the Windows BSDMC binary when playing on Windows."
                 );
                 return;
             }
@@ -186,7 +186,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         // --dir
         parser.addOption("dir");
         parser.addShortOpt("dir", 'd');
-        parser.addDocumentation("dir", "Use the supplied folder as MultiMC root instead of "
+        parser.addDocumentation("dir", "Use the supplied folder as BSDMC root instead of "
                                        "the binary location (use '.' for current)");
         // --launch
         parser.addOption("launch");
@@ -194,7 +194,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         parser.addDocumentation("launch", "Launch the specified instance (by instance ID)");
         // --alive
         parser.addSwitch("alive");
-        parser.addDocumentation("alive", "Write a small '" + liveCheckFile + "' file after MultiMC starts");
+        parser.addDocumentation("alive", "Write a small '" + liveCheckFile + "' file after BSDMC starts");
         // --import
         parser.addOption("import");
         parser.addShortOpt("import", 'I');
@@ -208,7 +208,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         catch (const ParsingError &e)
         {
             std::cerr << "CommandLineError: " << e.what() << std::endl;
-            std::cerr << "Try '%1 -h' to get help on MultiMC's command line parameters."
+            std::cerr << "Try '%1 -h' to get help on BSDMC's command line parameters."
                       << std::endl;
             m_status = MultiMC::Failed;
             return;
@@ -254,7 +254,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         QString xdgDataHome = QFile::decodeName(qgetenv("XDG_DATA_HOME"));
         if (xdgDataHome.isEmpty())
             xdgDataHome = QDir::homePath() + QLatin1String("/.local/share");
-        dataPath = xdgDataHome + "/multimc";
+        dataPath = xdgDataHome + "/bsdmc";
         adjustedBy += "XDG standard " + dataPath;
 #else
         dataPath = applicationDirPath();
@@ -265,30 +265,30 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
     if (!FS::ensureFolderPathExists(dataPath))
     {
         showFatalErrorMessage(
-            "MultiMC data folder could not be created.",
-            "MultiMC data folder could not be created.\n"
+            "BSDMC data folder could not be created.",
+            "BSDMC data folder could not be created.\n"
             "\n"
 #if defined(Q_OS_MAC)
             MACOS_HINT
 #endif
-            "Make sure you have the right permissions to the MultiMC data folder and any folder needed to access it.\n"
+            "Make sure you have the right permissions to the BSDMC data folder and any folder needed to access it.\n"
             "\n"
-            "MultiMC cannot continue until you fix this problem."
+            "BSDMC cannot continue until you fix this problem."
         );
         return;
     }
     if (!QDir::setCurrent(dataPath))
     {
         showFatalErrorMessage(
-            "MultiMC data folder could not be opened.",
-            "MultiMC data folder could not be opened.\n"
+            "BSDMC data folder could not be opened.",
+            "BSDMC data folder could not be opened.\n"
             "\n"
 #if defined(Q_OS_MAC)
             MACOS_HINT
 #endif
-            "Make sure you have the right permissions to the MultiMC data folder.\n"
+            "Make sure you have the right permissions to the BSDMC data folder.\n"
             "\n"
-            "MultiMC cannot continue until you fix this problem."
+            "BSDMC cannot continue until you fix this problem."
         );
         return;
     }
@@ -327,7 +327,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
 
     // init the logger
     {
-        static const QString logBase = "MultiMC-%0.log";
+        static const QString logBase = "BSDMC-%0.log";
         auto moveFile = [](const QString &oldName, const QString &newName)
         {
             QFile::remove(newName);
@@ -344,15 +344,15 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         if(!logFile->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
         {
             showFatalErrorMessage(
-                "MultiMC data folder is not writable!",
-                "MultiMC couldn't create a log file - the MultiMC data folder is not writable.\n"
+                "BSDMC data folder is not writable!",
+                "BSDMC couldn't create a log file - the BSDMC data folder is not writable.\n"
                 "\n"
     #if defined(Q_OS_MAC)
                 MACOS_HINT
     #endif
-                "Make sure you have write permissions to the MultiMC data folder.\n"
+                "Make sure you have write permissions to the BSDMC data folder.\n"
                 "\n"
-                "MultiMC cannot continue until you fix this problem."
+                "BSDMC cannot continue until you fix this problem."
             );
             return;
         }
@@ -363,12 +363,12 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
     // Set up paths
     {
         // Root path is used for updates.
-#ifdef Q_OS_LINUX
+#if defined Q_OS_LINUX || defined Q_OS_FREEBSD
         QDir foo(FS::PathCombine(binPath, ".."));
         m_rootPath = foo.absolutePath();
-#elif defined(Q_OS_WIN32)
+#elif defined Q_OS_WIN32
         m_rootPath = binPath;
-#elif defined(Q_OS_MAC)
+#elif defined Q_OS_MAC
         QDir foo(FS::PathCombine(binPath, "../.."));
         m_rootPath = foo.absolutePath();
         // on macOS, touch the root to force Finder to reload the .app metadata (and fix any icon change issues)
@@ -379,7 +379,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         ENV.setJarsPath( TOSTRING(MULTIMC_JARS_LOCATION) );
 #endif
 
-        qDebug() << "MultiMC 5, (c) 2013-2019 MultiMC Contributors";
+        qDebug() << "BSDMC, (c) 2013-2019 MultiMC Contributors, (c) 2020 BSDMC Contributors";
         qDebug() << "Version                    : " << BuildConfig.printableVersionString();
         qDebug() << "Git commit                 : " << BuildConfig.GIT_COMMIT;
         qDebug() << "Git refspec                : " << BuildConfig.GIT_REFSPEC;
@@ -425,7 +425,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
 
     // Initialize application settings
     {
-        m_settings.reset(new INISettingsObject("multimc.cfg", this));
+        m_settings.reset(new INISettingsObject("bsdmc.cfg", this));
         // Updates
         m_settings->registerSetting("UpdateChannel", BuildConfig.VERSION_CHANNEL);
         m_settings->registerSetting("AutoUpdate", true);

@@ -259,7 +259,7 @@ void InstanceList::deleteInstance(const InstanceId& id)
         return;
     }
 
-    qDebug() << "Instance" << id << "has been deleted by MultiMC.";
+    qDebug() << "Instance" << id << "has been deleted by BSDMC.";
 }
 
 static QMap<InstanceId, InstanceLocator> getIdMapping(const QList<InstancePtr> &list)

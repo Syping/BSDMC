@@ -1,4 +1,5 @@
 /* Copyright 2013-2019 MultiMC Contributors
+ * Copyright 2020 BSDMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +23,10 @@
 #include "MMCZip.h"
 #include "FileSystem.h"
 #include <QDir>
+
+#ifdef major
+#undef major
+#endif
 
 static QString replaceSuffix (QString target, const QString &suffix, const QString &replacement)
 {

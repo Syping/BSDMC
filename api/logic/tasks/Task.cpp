@@ -1,4 +1,5 @@
 /* Copyright 2013-2019 MultiMC Contributors
+ * Copyright 2020 BSDMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +64,7 @@ void Task::start()
         }
         case State::Running:
         {
-            qWarning() << "MultiMC tried to start task" << describe() << "while it was already running!";
+            qWarning() << "BSDMC tried to start task" << describe() << "while it was already running!";
             return;
         }
     }

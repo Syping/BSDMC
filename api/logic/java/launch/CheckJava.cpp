@@ -1,4 +1,5 @@
 /* Copyright 2013-2019 MultiMC Contributors
+ * Copyright 2020 BSDMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,14 +86,14 @@ void CheckJava::checkJavaFinished(JavaCheckResult result)
             // Error message displayed if java can't start
             emit logLine(tr("Could not start java:"), MessageLevel::Error);
             emit logLines(result.errorLog.split('\n'), MessageLevel::Error);
-            emit logLine("\nCheck your MultiMC Java settings.", MessageLevel::MultiMC);
+            emit logLine("\nCheck your BSDMC Java settings.", MessageLevel::MultiMC);
             printSystemInfo(false, false);
             emitFailed(tr("Could not start java!"));
             return;
         }
         case JavaCheckResult::Validity::ReturnedInvalidData:
         {
-            emit logLine(tr("Java checker returned some invalid data MultiMC doesn't understand:"), MessageLevel::Error);
+            emit logLine(tr("Java checker returned some invalid data BSDMC doesn't understand:"), MessageLevel::Error);
             emit logLines(result.outLog.split('\n'), MessageLevel::Warning);
             emit logLine("\nMinecraft might not start properly.", MessageLevel::MultiMC);
             printSystemInfo(false, false);

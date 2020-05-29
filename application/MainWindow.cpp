@@ -1,4 +1,5 @@
 /* Copyright 2013-2019 MultiMC Contributors
+ * Copyright 2020 BSDMC Contributors
  *
  * Authors: Andrew Okin
  *          Peterix
@@ -310,7 +311,7 @@ public:
         actionReportBug->setObjectName(QStringLiteral("actionReportBug"));
         actionReportBug->setIcon(MMC->getThemedIcon("bug"));
         actionReportBug.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Report a Bug"));
-        actionReportBug.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the bug tracker to report a bug with MultiMC."));
+        actionReportBug.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the bug tracker to report a bug with BSDMC."));
         all_actions.append(&actionReportBug);
         helpMenu->addAction(actionReportBug);
 
@@ -334,14 +335,14 @@ public:
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
         actionAbout->setIcon(MMC->getThemedIcon("about"));
         actionAbout->setMenuRole(QAction::AboutRole);
-        actionAbout.setTextId(QT_TRANSLATE_NOOP("MainWindow", "About MultiMC"));
-        actionAbout.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "View information about MultiMC."));
+        actionAbout.setTextId(QT_TRANSLATE_NOOP("MainWindow", "About BSDMC"));
+        actionAbout.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "View information about BSDMC."));
         all_actions.append(&actionAbout);
         helpMenu->addAction(actionAbout);
 
         helpMenuButton = TranslatedToolButton(MainWindow);
         helpMenuButton.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Help"));
-        helpMenuButton.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Get help with MultiMC or Minecraft."));
+        helpMenuButton.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Get help with MultiMC/BSDMC or Minecraft."));
         helpMenuButton->setMenu(helpMenu);
         helpMenuButton->setPopupMode(QToolButton::InstantPopup);
         helpMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -358,7 +359,7 @@ public:
             actionCheckUpdate->setObjectName(QStringLiteral("actionCheckUpdate"));
             actionCheckUpdate->setIcon(MMC->getThemedIcon("checkupdate"));
             actionCheckUpdate.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Update"));
-            actionCheckUpdate.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Check for new updates for MultiMC."));
+            actionCheckUpdate.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Check for new updates for BSDMC."));
             all_actions.append(&actionCheckUpdate);
             mainToolBar->addAction(actionCheckUpdate);
         }
@@ -577,8 +578,8 @@ public:
         }
         MainWindow->resize(800, 600);
         MainWindow->setWindowIcon(MMC->getThemedIcon("logo"));
-        MainWindow->setWindowTitle("MultiMC 5");
-        MainWindow->setAccessibleName("MultiMC");
+        MainWindow->setWindowTitle("BSDMC 5");
+        MainWindow->setAccessibleName("BSDMC");
 
         createMainToolbar(MainWindow);
 
@@ -602,7 +603,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        QString winTitle = tr("MultiMC 5 - Version %1").arg(BuildConfig.printableVersionString());
+        QString winTitle = tr("BSDMC 5 - Version %1").arg(BuildConfig.printableVersionString());
         if (!BuildConfig.BUILD_PLATFORM.isEmpty())
         {
             winTitle += tr(" on %1", "on platform, as in operating system").arg(BuildConfig.BUILD_PLATFORM);
@@ -882,7 +883,7 @@ void MainWindow::showInstanceContextMenu(const QPoint &pos)
     {
         auto group = view->groupNameAt(pos);
 
-        QAction *actionVoid = new QAction("MultiMC", this);
+        QAction *actionVoid = new QAction("BSDMC", this);
         actionVoid->setEnabled(false);
 
         QAction *actionCreateInstance = new QAction(tr("Create instance"), this);
@@ -1387,7 +1388,7 @@ void MainWindow::finalizeInstance(InstancePtr inst)
     }
     else
     {
-        CustomMessageBox::selectable(this, tr("Error"), tr("MultiMC cannot download Minecraft or update instances unless you have at least "
+        CustomMessageBox::selectable(this, tr("Error"), tr("BSDMC cannot download Minecraft or update instances unless you have at least "
                                                            "one account added.\nPlease add your Mojang or Minecraft account."),
                                      QMessageBox::Warning)
             ->show();
@@ -1453,11 +1454,13 @@ void MainWindow::droppedURLs(QList<QUrl> urls)
 
 void MainWindow::on_actionREDDIT_triggered()
 {
+    QMessageBox::information(this, tr("Warning"), tr("<b>Remember:</b> BSDMC is a fork from MultiMC, please don't spam the MultiMC developers with BSDMC related issues, thanks!"));
     DesktopServices::openUrl(QUrl("https://www.reddit.com/r/MultiMC/"));
 }
 
 void MainWindow::on_actionDISCORD_triggered()
 {
+    QMessageBox::information(this, tr("Warning"), tr("<b>Remember:</b> BSDMC is a fork from MultiMC, please don't spam the MultiMC developers with BSDMC related issues, thanks!"));
     DesktopServices::openUrl(QUrl("https://discord.gg/0k2zsXGNHs0fE4Wm"));
 }
 
@@ -1636,7 +1639,7 @@ void MainWindow::on_actionManageAccounts_triggered()
 
 void MainWindow::on_actionReportBug_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://github.com/MultiMC/MultiMC5/issues"));
+    DesktopServices::openUrl(QUrl("https://github.com/Syping/BSDMC/issues"));
 }
 
 void MainWindow::on_actionPatreon_triggered()
@@ -1885,18 +1888,18 @@ void MainWindow::checkInstancePathForProblems()
         warning.setText(tr("Your instance folder contains \'!\' and this is known to cause Java problems!"));
         warning.setInformativeText(tr("You have now two options: <br/>"
                                       " - change the instance folder in the settings <br/>"
-                                      " - move this installation of MultiMC5 to a different folder"));
+                                      " - move this installation of BSDMC to a different folder"));
         warning.setDefaultButton(QMessageBox::Ok);
         warning.exec();
     }
     auto tempFolderText = tr("This is a problem: <br/>"
-                             " - MultiMC will likely be deleted without warning by the operating system <br/>"
-                             " - close MultiMC now and extract it to a real location, not a temporary folder");
+                             " - BSDMC will likely be deleted without warning by the operating system <br/>"
+                             " - close BSDMC now and extract it to a real location, not a temporary folder");
     QString pathfoldername = QDir(instanceFolder).absolutePath();
     if (pathfoldername.contains("Rar$", Qt::CaseInsensitive))
     {
         QMessageBox warning(this);
-        warning.setText(tr("Your instance folder contains \'Rar$\' - that means you haven't extracted the MultiMC zip!"));
+        warning.setText(tr("Your instance folder contains \'Rar$\' - that means you haven't extracted the BSDMC zip!"));
         warning.setInformativeText(tempFolderText);
         warning.setDefaultButton(QMessageBox::Ok);
         warning.exec();

@@ -1,4 +1,5 @@
 /* Copyright 2013-2019 MultiMC Contributors
+ * Copyright 2020 BSDMC Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -386,7 +387,7 @@ void VersionPage::on_actionDownload_All_triggered()
     {
         CustomMessageBox::selectable(
             this, tr("Error"),
-            tr("MultiMC cannot download Minecraft or update instances unless you have at least "
+            tr("BSDMC cannot download Minecraft or update instances unless you have at least "
                "one account added.\nPlease add your Mojang or Minecraft account."),
             QMessageBox::Warning)->show();
         return;

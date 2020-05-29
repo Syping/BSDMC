@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.1)
 
 string(COMPARE EQUAL "${CMAKE_SOURCE_DIR}" "${CMAKE_BUILD_DIR}" IS_IN_SOURCE_BUILD)
 if(IS_IN_SOURCE_BUILD)
-    message(FATAL_ERROR "You are building MultiMC in-source. Please separate the build tree from the source tree.")
+    message(FATAL_ERROR "You are building BSDMC in-source. Please separate the build tree from the source tree.")
 endif()
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(CMAKE_HOST_SYSTEM_VERSION MATCHES ".*[Mm]icrosoft.*" OR
         CMAKE_HOST_SYSTEM_VERSION MATCHES ".*WSL.*"
     )
-        message(FATAL_ERROR "Building MultiMC is not supported in Linux-on-Windows distributions.")
+        message(FATAL_ERROR "Building BSDMC is not supported in Linux-on-Windows distributions.")
     endif()
 endif()
 
@@ -18,7 +18,7 @@ if(WIN32)
     cmake_policy(SET CMP0020 OLD)
 endif()
 
-project(MultiMC)
+project(BSDMC)
 enable_testing()
 
 
@@ -171,7 +171,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
     set(JARS_DEST_DIR "bin/jars")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/MultiMC")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/BSDMC")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -183,7 +183,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
     SET(MultiMC_BINARY_RPATH "$ORIGIN/")
 
     # Install basic runner script
-    install(PROGRAMS application/package/linux/MultiMC DESTINATION ${BUNDLE_DEST_DIR})
+    install(PROGRAMS application/package/linux/BSDMC DESTINATION ${BUNDLE_DEST_DIR})
 
 elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-nodeps")
     set(BINARY_DEST_DIR "bin")
@@ -227,7 +227,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "win-bundle")
     set(JARS_DEST_DIR "jars")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiMC.exe")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/BSDMC.exe")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -246,7 +246,7 @@ set_directory_properties(PROPERTIES EP_BASE External)
 option(NBT_BUILD_SHARED "Build NBT shared library" ON)
 option(NBT_USE_ZLIB "Build NBT library with zlib support" OFF)
 option(NBT_BUILD_TESTS "Build NBT library tests" OFF) #FIXME: fix unit tests.
-set(NBT_NAME MultiMC_nbt++)
+set(NBT_NAME BSDMC_nbt++)
 set(NBT_DEST_DIR ${LIBRARY_DEST_DIR})
 add_subdirectory(libraries/libnbtplusplus)
 

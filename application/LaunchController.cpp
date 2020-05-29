@@ -45,7 +45,7 @@ void LaunchController::login()
         auto reply = CustomMessageBox::selectable(
             m_parentWidget, tr("No Accounts"),
             tr("In order to play Minecraft, you must have at least one Mojang or Minecraft "
-               "account logged in to MultiMC."
+               "account logged in to BSDMC."
                "Would you like to open the account manager to add an account now?"),
             QMessageBox::Information, QMessageBox::Yes | QMessageBox::No)->exec();
 
@@ -216,7 +216,7 @@ void LaunchController::launchInstance()
     connect(m_launcher.get(), &LaunchTask::requestProgress, this, &LaunchController::onProgressRequested);
 
 
-    m_launcher->prependStep(new TextPrint(m_launcher.get(), "MultiMC version: " + BuildConfig.printableVersionString() + "\n\n", MessageLevel::MultiMC));
+    m_launcher->prependStep(new TextPrint(m_launcher.get(), "BSDMC version: " + BuildConfig.printableVersionString() + "\n\n", MessageLevel::MultiMC));
     m_launcher->start();
 }
 

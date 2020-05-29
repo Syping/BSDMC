@@ -302,25 +302,25 @@ qt5_wrap_ui(MULTIMC_UI ${MULTIMC_UIS})
 qt5_add_resources(MULTIMC_RESOURCES ${MULTIMC_QRCS})
 
 # Add executable
-add_executable(MultiMC MACOSX_BUNDLE WIN32 ${MULTIMC_SOURCES} ${MULTIMC_UI} ${MULTIMC_RESOURCES} ${MULTIMC_RCS})
-target_link_libraries(MultiMC MultiMC_gui ${QUAZIP_LIBRARIES} hoedown MultiMC_rainbow LocalPeer ganalytics)
+add_executable(BSDMC MACOSX_BUNDLE WIN32 ${MULTIMC_SOURCES} ${MULTIMC_UI} ${MULTIMC_RESOURCES} ${MULTIMC_RCS})
+target_link_libraries(BSDMC BSDMC_gui ${QUAZIP_LIBRARIES} hoedown BSDMC_rainbow LocalPeer ganalytics)
 if(DEFINED MultiMC_APP_BINARY_NAME)
-    set_target_properties(MultiMC PROPERTIES OUTPUT_NAME "${MultiMC_APP_BINARY_NAME}")
+    set_target_properties(BSDMC PROPERTIES OUTPUT_NAME "${MultiMC_APP_BINARY_NAME}")
 endif()
 if(DEFINED MultiMC_BINARY_RPATH)
-    SET_TARGET_PROPERTIES(MultiMC PROPERTIES INSTALL_RPATH "${MultiMC_BINARY_RPATH}")
+    SET_TARGET_PROPERTIES(BSDMC PROPERTIES INSTALL_RPATH "${MultiMC_BINARY_RPATH}")
 endif()
 if(DEFINED MultiMC_APP_BINARY_DEFS)
-    target_compile_definitions(MultiMC PRIVATE ${MultiMC_APP_BINARY_DEFS})
+    target_compile_definitions(BSDMC PRIVATE ${MultiMC_APP_BINARY_DEFS})
 endif()
 
-install(TARGETS MultiMC
+install(TARGETS BSDMC
     BUNDLE DESTINATION ${BUNDLE_DEST_DIR} COMPONENT Runtime
     LIBRARY DESTINATION ${LIBRARY_DEST_DIR} COMPONENT Runtime
     RUNTIME DESTINATION ${BINARY_DEST_DIR} COMPONENT Runtime
 )
 
-#### The MultiMC bundle mess! ####
+#### The BSDMC bundle mess! ####
 # Bundle utilities are used to complete the portable packages - they add all the libraries that would otherwise be missing on the target system.
 # NOTE: it seems that this absolutely has to be here, and nowhere else.
 if(INSTALL_BUNDLE STREQUAL "full")
