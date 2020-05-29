@@ -303,7 +303,7 @@ qt5_add_resources(MULTIMC_RESOURCES ${MULTIMC_QRCS})
 
 # Add executable
 add_executable(BSDMC MACOSX_BUNDLE WIN32 ${MULTIMC_SOURCES} ${MULTIMC_UI} ${MULTIMC_RESOURCES} ${MULTIMC_RCS})
-target_link_libraries(BSDMC BSDMC_gui ${QUAZIP_LIBRARIES} hoedown BSDMC_rainbow LocalPeer ganalytics)
+target_link_libraries(BSDMC MultiMC_gui ${QUAZIP_LIBRARIES} hoedown MultiMC_rainbow LocalPeer ganalytics)
 if(DEFINED MultiMC_APP_BINARY_NAME)
     set_target_properties(BSDMC PROPERTIES OUTPUT_NAME "${MultiMC_APP_BINARY_NAME}")
 endif()

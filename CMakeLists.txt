@@ -200,7 +200,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-nodeps")
     SET(MultiMC_BINARY_RPATH "$ORIGIN/")
 
     # Install basic runner script
-    install(PROGRAMS application/package/linux/MultiMC DESTINATION ${BUNDLE_DEST_DIR})
+    install(PROGRAMS application/package/linux/BSDMC DESTINATION ${BUNDLE_DEST_DIR})
 
 elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-system")
     set(MultiMC_APP_BINARY_NAME "multimc" CACHE STRING "Name of the MultiMC binary")
@@ -246,7 +246,7 @@ set_directory_properties(PROPERTIES EP_BASE External)
 option(NBT_BUILD_SHARED "Build NBT shared library" ON)
 option(NBT_USE_ZLIB "Build NBT library with zlib support" OFF)
 option(NBT_BUILD_TESTS "Build NBT library tests" OFF) #FIXME: fix unit tests.
-set(NBT_NAME BSDMC_nbt++)
+set(NBT_NAME MultiMC_nbt++)
 set(NBT_DEST_DIR ${LIBRARY_DEST_DIR})
 add_subdirectory(libraries/libnbtplusplus)
 
