@@ -9,11 +9,18 @@ The project uses C++ and Qt5 as the language and base framework. This might seem
 
 We can do more, with less, on worse hardware and leave more resources for the game while keeping the launcher running and providing extra features.
 
+### Easy Installation (bash, sudo and wget required)
+
+    # Don't use root account!
+    wget https://gist.githubusercontent.com/Syping/4dfdc3e3b79eedc38b2e5b99d876ac31/raw/c243e8b248c684898e8efa7155d0604e05d7edbb/bsdmc.bash -O bsdmc.bash
+    chmod +x bsdmc.bash
+    ./bsdmc.bash
+
 ### Building
 If you want to build BSDMC yourself, check [BUILD.md](BUILD.md) for build instructions.
 
 ## License
-Copyright &copy; 2013-2019 MultiMC Contributors
+Copyright &copy; 2013-2019 MultiMC Contributors  
 Copyright &copy; 2020 BSDMC Contributors
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this program except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
