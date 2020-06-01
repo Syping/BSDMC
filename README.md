@@ -12,7 +12,7 @@ We can do more, with less, on worse hardware and leave more resources for the ga
 ### Easy Installation (bash, sudo and wget required)
 
     # Don't use root account!
-    wget https://gist.githubusercontent.com/Syping/4dfdc3e3b79eedc38b2e5b99d876ac31/raw/c243e8b248c684898e8efa7155d0604e05d7edbb/bsdmc.bash -O bsdmc.bash
+    wget https://gist.githubusercontent.com/Syping/4dfdc3e3b79eedc38b2e5b99d876ac31/raw/bsdmc.bash -O bsdmc.bash
     chmod +x bsdmc.bash
     ./bsdmc.bash
 
